@@ -46,7 +46,7 @@ db.connect((err) => {
   }
 });
 
-const PORT = 5002;
+const PORT = 5003;
 const JWT_SECRET = "very_secure_secret_key_123";
 
 // ---------------------------
