@@ -94,7 +94,7 @@ app.post("/register", (req, res) => {
 // ---------------------------
 // LOGIN ROUTE
 // ---------------------------
-app.post("/api/auth/login", (req, res) => {
+app.post("/login", (req, res) => {
   const { email, password } = req.body;
 
   db.query(

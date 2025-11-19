@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import "./Login.css";
-//import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
-function Signup({ onSwitch }) {
+function Signup() {
+  const navigate=useNavigate()
     const [form, setForm] = useState({
         name: "",
         email: "",
@@ -82,7 +83,7 @@ function Signup({ onSwitch }) {
 
           <p className="switch-text">
             Already have an account?{" "}
-            <span onClick={onSwitch}>Login</span>
+            <span onClick={()=> navigate("/login")}>Login</span>
           </p>
         </form>
 
