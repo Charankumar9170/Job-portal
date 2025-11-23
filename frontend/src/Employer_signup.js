@@ -46,13 +46,33 @@ function Employersignup() {
     
     
   return (
-    <div className="main-bg">
-      <div className="btn">
-        <button className="home-page" onClick={()=>navigate("/")}>⌂ Home</button>
+    <div >
+      <div className="Navigation">
+       <header className="navbar">
+        <div className="logo">
+          <span className="logo-highlight"> Job</span> Listing <span className="logo-highlight"> Portal</span>
+        </div>
+
+        <nav>
+          <ul className="nav-links">
+            <li><a href="/">Home</a></li>
+            <li>Jobs</li>
+            <li onClick={() => document.getElementById("about-section").scrollIntoView({ behavior: "smooth" })}>About</li>
+            <li>Employers</li>
+            <li onClick={() => document.getElementById("contact-section").scrollIntoView({ behavior: "smooth" })}>Contact
+            </li>
+          </ul>
+        </nav>
+
+        <div className="nav-buttons">
+          <button className="btn-outline" onClick={()=>navigate("/employer-login")}>Login</button>
+        </div>
+      </header>
       </div>
+      <div className="main-bg">
       <div className="login-container">
         <form className="login-box" onSubmit={handleSubmit}>
-          <h2>Sign Up</h2>
+          <h2>Employer SignUp</h2>
 
           <input
             type="text"
@@ -94,6 +114,7 @@ function Employersignup() {
           <img src="/image1.jpeg" height={100} width={100} alt="Signup Visual" />
         </div>
 
+      </div>
       </div>
     </div>
   );
