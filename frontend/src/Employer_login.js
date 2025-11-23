@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./Login.css";
 import { useNavigate } from "react-router-dom";
-function Login() {
+function Employerlogin() {
   const navigate = useNavigate();
   const [form, setForm] = useState({
     email: "",
@@ -19,7 +19,7 @@ function Login() {
     setMessage("");
 
     try {
-      const response = await fetch("http://localhost:5003/login", {
+      const response = await fetch("http://localhost:5003/employer-login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(form),
@@ -34,7 +34,7 @@ function Login() {
         alert("Login successful!");
 
         // Redirect to dashboard or profile page
-        navigate("/user-home-page");
+        navigate("/employer-home-page");
       } else {
         setMessage(data.message || "Login failed");
       }
@@ -50,11 +50,11 @@ function Login() {
       </div>
       <div className="login-container">
         <form className="login-box" onSubmit={handleSubmit}>
-          <h2>User Login</h2>
+          <h2>Employer Login</h2>
 
           <input
             type="email"
-            placeholder="Enter Email"
+            placeholder="Enter Employer Email"
             name="email"
             value={form.email}
             onChange={handleChange}
@@ -75,7 +75,7 @@ function Login() {
 
           <p className="switch-text">
             Don’t have an account?{" "}
-            <span onClick={()=>navigate("/signup")}>Sign up</span>
+            <span onClick={()=>navigate("/employer-signup")}>Sign up</span>
           </p>
         </form>
 
@@ -88,4 +88,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default Employerlogin;

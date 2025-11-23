@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./Login.css";
 import { useNavigate } from "react-router-dom";
 
-function Signup() {
+function Employersignup() {
   const navigate=useNavigate()
     const [form, setForm] = useState({
         name: "",
@@ -21,7 +21,7 @@ function Signup() {
         setMessage("");
     
         try {
-          const response = await fetch("http://localhost:5003/register", {
+          const response = await fetch("http://localhost:5003/employer-register", {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
@@ -86,7 +86,7 @@ function Signup() {
 
           <p className="switch-text">
             Already have an account?{" "}
-            <span onClick={()=> navigate("/login")}>Login</span>
+            <span onClick={()=> navigate("/employer-login")}>Login</span>
           </p>
         </form>
 
@@ -99,4 +99,4 @@ function Signup() {
   );
 }
 
-export default Signup;
+export default Employersignup;

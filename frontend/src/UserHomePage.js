@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-export default function Home() {
+export default function UserHomePage() {
   const navigate = useNavigate();
   const [user, setUser] = useState(null); 
   const [loading, setLoading] = useState(true);
@@ -45,19 +45,21 @@ export default function Home() {
   return (
     <div className="main">
       <div className="navigation-bar"></div>
-
-      <div className="body">
+      <div className="bod">
+        <h1>USER PROFILE</h1>
         <h2>Welcome {user?.name}</h2>
         <p>This is your email: <strong>{user?.email}</strong></p>
+        
 
         <button
           onClick={() => {
             localStorage.removeItem("token");
-            navigate("/login");
+            navigate("/home-page");
           }}
         >
           Logout
         </button>
+        <h1>Richa has to complete this Page</h1>
       </div>
     </div>
   );
