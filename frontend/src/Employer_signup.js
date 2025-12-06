@@ -5,7 +5,9 @@ import { useNavigate } from "react-router-dom";
 function Employersignup() {
   const navigate=useNavigate()
     const [form, setForm] = useState({
+        organisation: "",
         name: "",
+        mobile_num:"",
         email: "",
         password: ""
       });
@@ -33,7 +35,7 @@ function Employersignup() {
     
           if (response.ok) {
             alert("registration completed");
-            setForm({ name: "", email: "", password: "" });
+            setForm({organisation:"", name: "", mobile_num : "", email: "", password: "" });
           } else {
             setMessage(result.error || "Email already exists!");
           }
@@ -65,7 +67,7 @@ function Employersignup() {
         </nav>
 
         <div className="nav-buttons">
-          <button className="btn-outline" onClick={()=>navigate("/employer-login")}>Login</button>
+          <button className="btn-outline" onClick={()=>navigate("/employer-login")}>Admin Login</button>
         </div>
       </header>
       </div>
@@ -73,12 +75,27 @@ function Employersignup() {
       <div className="login-container">
         <form className="login-box" onSubmit={handleSubmit}>
           <h2>Employer SignUp</h2>
-
+          <input
+            type="text"
+            placeholder="Organisation Name"
+            name="organisation"
+            value={form.organisation}
+            onChange={handleChange}
+            required
+          />
           <input
             type="text"
             placeholder="Full Name"
             name="name"
             value={form.name}
+            onChange={handleChange}
+            required
+          />
+          <input
+            type="number"
+            placeholder="Mobile Number"
+            name="mobile_num"
+            value={form.mobile_num}
             onChange={handleChange}
             required
           />

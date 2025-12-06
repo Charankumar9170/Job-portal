@@ -1,0 +1,536 @@
+/* MainLayout.css */
+
+/* ===========================
+   GLOBAL RESET + VARIABLES
+=========================== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+      sans-serif;
+  }
+ 
+  .app {
+    min-height: 100vh;
+    position: relative;
+    overflow-x: hidden;
+  }
+  
+  /* Background image */
+  .bg-layer {
+    position: fixed;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    filter: brightness(0.95);
+    opacity: 0.4;
+    z-index: -1;
+  }
+
+  
+  /* Theme variables */
+  .app.light {
+    --bg-top: rgba(255, 255, 255, 0.4);
+    --bg-card: rgba(255, 255, 255, 0.96);
+    --bg-card-soft: rgba(255, 255, 255, 0.92);
+    --text-main: #111;
+    --text-subtle: #555;
+    --accent: #1a73e8;
+    --accent-soft: rgba(26, 115, 232, 0.12);
+    --danger: #e53935;
+    --danger-soft: rgba(229, 57, 53, 0.12);
+  }
+  
+  .app.dark {
+    --bg-top: rgba(18, 18, 18, 0.9);
+    --bg-card: rgba(25, 25, 25, 0.98);
+    --bg-card-soft: rgba(30, 30, 30, 0.95);
+    --text-main: #f5f5f5;
+    --text-subtle: #cfcfcf;
+    --accent: #4c8dff;
+    --accent-soft: rgba(76, 141, 255, 0.15);
+    --danger: #ff6b6b;
+    --danger-soft: rgba(255, 107, 107, 0.18);
+  }
+  
+  /* ===========================
+     TOP BAR
+  =========================== */
+  .topbar {
+    width: 100%;
+    height:130px;
+    background: var(--bg-top);
+    backdrop-filter: blur(18px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.25);
+    position: sticky;
+    top: 0;
+    z-index: 40;
+    border: 1px solid black;
+  }
+
+  .topbar-inner {
+    padding: 14px 32px 10px 32px;
+    display: flex;
+    justify-content: space-between;
+
+  }
+  
+  /* Left: title + subtitle + tabs */
+  .topbar-left {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .title{
+    margin-left: 160px;
+  }
+  .topbar-left-text h1 {
+    font-size: 30px;
+    font-weight: 900;
+    color: var(--text-main);
+  }
+  
+  .topbar-left-text p {
+    font-size: 13px;
+    color: var(--text-subtle);
+  }
+  
+  /* OLD nav tabs (if still used) */
+  .nav-tabs-row {
+    margin-top: 8px;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  
+  .nav-pill {
+    padding: 8px 18px;
+    border-radius: 999px;
+    border: none;
+    background: rgba(255, 255, 255, 0.98);
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.18);
+    color: #111;
+    transition: 0.2s ease;
+  }
+  
+  .nav-pill:hover {
+    transform: translateY(-2px);
+  }
+  
+  .nav-pill.active {
+    background: var(--accent);
+    color: white;
+  }
+  
+  /* Right: theme + profile */
+  .topbar-right {
+    display: flex;
+    align-items: right;
+    gap: 10px;
+
+    margin-left:570px;
+  }
+  
+  .theme-toggle {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    background: white;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.25);
+  }
+  
+  .profile-wrapper {
+    position: relative;
+
+  }
+  
+  .profile-avatar {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: none;
+    background: linear-gradient(135deg, #222, #555);
+    color: #fff;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.35);
+  }
+  
+  /* ===========================
+     PROFILE DROPDOWN PANEL (≈40%)
+  =========================== */
+  .profile-panel {
+    position: absolute;
+    top: 54px;
+    right: 0;
+    width: 40vw;
+    max-width: 420px;
+    min-width: 280px;
+    padding: 18px 20px;
+    background: var(--bg-card);
+    border-radius: 18px;
+    box-shadow: 0 14px 40px rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(20px);
+    animation: dropdownFade 0.25s ease;
+    z-index: 60;
+    
+  }
+
+  .profile-panel h2 {
+    margin-bottom: 8px;
+    font-size: 18px;
+    font-weight: 800;
+    color: var(--text-main);
+  }
+  
+  .profile-info p {
+    font-size: 14px;
+    margin-bottom: 4px;
+    color: var(--text-subtle);
+  }
+  .profile-data{
+    margin-right:5px;
+    width:100%;
+  }
+  /* Profile buttons */
+  .panel-btn {
+    width: 100%;
+    padding: 10px;
+    border-radius: 12px;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    margin-top: 10px;
+    transition: 0.2s ease;
+  }
+  
+  .panel-btn.view {
+    background: var(--accent);
+    color: white;
+  }
+  
+  .panel-btn.view:hover {
+    transform: translateY(-1px) scale(1.01);
+    box-shadow: 0 6px 18px var(--accent-soft);
+  }
+  
+  .panel-btn.logout {
+    background: var(--danger);
+    color: white;
+  }
+ 
+  .panel-btn.logout:hover {
+    transform: translateY(-1px) scale(1.01);
+    box-shadow: 0 6px 18px var(--danger-soft);
+  }
+  
+  @keyframes dropdownFade {
+    from {
+      opacity: 0;
+      transform: translateY(-8px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  /* ===========================
+     PAGE CONTENT – 60% LEFT AREA
+  =========================== */
+  .page-shell {
+    padding: 28px 32px 40px 32px;
+    width: 60%;
+    margin-top: 120px;
+    margin-left: 15%;
+  }
+  
+  /* Main content card */
+  .page-card {
+    padding: 26px 26px 28px 26px;
+    border-radius: 24px;
+    background: var(--bg-card-soft);
+    backdrop-filter: blur(18px);
+    box-shadow:
+      0 18px 40px rgba(0, 0, 0, 0.28),
+      0 0 0 1px rgba(255, 255, 255, 0.5);
+    border: 1px solid rgba(255,255,255,0.7);
+  }
+  
+  /* Titles */
+  .page-title {
+    font-size: 24px;
+    font-weight: 800;
+    margin-bottom: 4px;
+  }
+  
+  .page-subtitle {
+    font-size: 13px;
+    color: var(--text-subtle);
+    margin-bottom: 20px;
+  }
+  
+  /* ===========================
+     DASHBOARD STATS
+  =========================== */
+  .stat-row {
+    display: flex;
+    gap: 16px;
+    margin-top: 16px;
+  }
+  
+  .stat-card {
+    flex: 1;
+    padding: 14px;
+    border-radius: 18px;
+    background: linear-gradient(145deg, rgba(255,255,255,0.96), rgba(245,245,245,0.9));
+    box-shadow: 0 12px 30px rgba(0,0,0,0.18);
+    border: 1px solid rgba(255,255,255,0.9);
+    text-align: left;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .app.dark .stat-card {
+    background: linear-gradient(145deg, #252525, #1a1a1a);
+    border-color: rgba(255,255,255,0.08);
+  }
+  
+  .stat-icon {
+    font-size: 22px;
+    margin-bottom: 6px;
+  }
+  
+  .stat-label {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text-subtle);
+  }
+  
+  .stat-value {
+    font-size: 20px;
+    font-weight: 800;
+    margin-top: 4px;
+  }
+  
+  /* ===========================
+     FORM / JOB PAGES
+  =========================== */
+  .section-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11px;
+    padding: 4px 10px;
+    border-radius: 999px;
+    background: var(--accent-soft);
+    color: var(--accent);
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+  
+  .form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px 16px;
+    margin-bottom: 16px;
+  }
+  
+  .form-group label {
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 4px;
+    display: block;
+  }
+  
+  .form-group small {
+    display: block;
+    font-size: 11px;
+    color: var(--text-subtle);
+    margin-bottom: 4px;
+  }
+  
+  .form-group input,
+  .form-group textarea {
+    width: 100%;
+    padding: 10px 12px;
+    border-radius: 12px;
+    border: 1px solid rgba(0, 0, 0, 0.18);
+    outline: none;
+    background: rgba(255, 255, 255, 0.98);
+    transition: 0.18s ease;
+  }
+  
+  .form-group textarea {
+    min-height: 80px;
+    resize: vertical;
+  }
+  
+  .app.dark .form-group input,
+  .app.dark .form-group textarea {
+    background: rgba(18, 18, 18, 0.96);
+    border-color: rgba(255, 255, 255, 0.18);
+    color: #f5f5f5;
+  }
+  
+  /* Focus / hover */
+  .form-group input:focus,
+  .form-group textarea:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 1px var(--accent-soft), 0 6px 14px rgba(0,0,0,0.18);
+    transform: translateY(-1px);
+  }
+  
+  /* Primary & danger buttons */
+  .primary-btn,
+  .danger-btn {
+    padding: 10px 22px;
+    border-radius: 999px;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    margin-top: 12px;
+    font-size: 14px;
+    letter-spacing: 0.02em;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+    transition: 0.18s ease;
+  }
+  
+  .primary-btn {
+    background: linear-gradient(135deg, #1a73e8, #0053c7);
+    color: white;
+  }
+  
+  .primary-btn:hover {
+    transform: translateY(-1px) scale(1.02);
+    box-shadow: 0 10px 26px rgba(26,115,232,0.45);
+  }
+  
+  .danger-btn {
+    background: linear-gradient(135deg, #e53935, #c11f21);
+    color: white;
+  }
+  
+  .danger-btn:hover {
+    transform: translateY(-1px) scale(1.02);
+    box-shadow: 0 10px 26px rgba(229,57,53,0.45);
+  }
+  
+  /* All jobs list */
+  .job-list {
+    margin-top: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .job-card {
+    padding: 12px 16px;
+    border-radius: 16px;
+    background: var(--bg-card);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.16);
+  }
+  
+  /* ===========================
+     RESPONSIVE
+  =========================== */
+  @media (max-width: 900px) {
+    .page-shell {
+      width: 100%;
+      padding: 20px;
+    }
+  
+    .topbar-inner {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 10px;
+    }
+  
+    .profile-panel {
+      right: 10px;
+      width: calc(100vw - 20px);
+    }
+  
+    .form-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+  
+  /* ==========================================
+     UNIVERSAL TEXT COLOR FIX
+  ========================================== */
+  .app.light {
+    --text-main: #121212;
+    --text-subtle: #555;
+  }
+  
+  .app.dark {
+    --text-main: #ffffff;
+    --text-subtle: #cccccc;
+  }
+  
+  body,
+  .app {
+    color: var(--text-main);
+  }
+  
+  /* Force headings, labels, paragraphs, etc. to inherit */
+  h1, h2, h3, p, label, span, button {
+    color: var(--text-main);
+  }
+  
+  /* ==========================================
+     BEAUTIFUL NAVBAR BUTTONS
+  ========================================== */
+  
+  .nav-tabs-row {
+    margin-top: 8px;
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  
+  /* Default button style */
+  .nav-tab-pill {
+    padding: 10px 20px;
+    border-radius: 50px;
+    border: 2px solid rgba(255,255,255,0.8);
+    background: rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(10px);
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-main);
+    transition: 0.25s ease;
+  }
+  
+  /* Hover effect */
+  .nav-tab-pill:hover {
+    background: rgba(30, 136, 255, 0.9);
+    color: white !important;
+    border-color: rgba(30, 136, 255, 1);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.25);
+  }
+  
+  /* Active tab */
+  .nav-tab-pill.active {
+    background: rgba(30, 136, 255, 1);
+    color: #fff !important;
+    border-color: rgba(30, 136, 255, 1);
+    box-shadow: 0 6px 18px rgba(30, 136, 255, 0.6);
+  }
+  

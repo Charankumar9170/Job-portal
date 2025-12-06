@@ -65,8 +65,8 @@ function Signup() {
         </nav>
 
         <div className="nav-buttons">
-          <button className="btn-outline" onClick={()=>navigate("/login")}>Login</button>
-          <button className="btn-primary" onClick={()=>navigate("/employer-login")}>Post Job</button>
+          <button className="btn-outline" onClick={()=>navigate("/login")}>User Login</button>
+          <button className="btn-primary" onClick={()=>navigate("/employer-login")}>Employer Login</button>
         </div>
       </header>
       </div>

@@ -1,6 +1,7 @@
 import React from "react";
 import "./HomePage.css";
 import { useNavigate } from "react-router-dom";
+import JobList from "./JobList";
 
 const HomePage = () => {
     const navigate=useNavigate();
@@ -16,7 +17,7 @@ const HomePage = () => {
         <nav>
           <ul className="nav-links">
             <li>Home</li>
-            <li>Jobs</li>
+            <li onClick={() => document.getElementById("job-list").scrollIntoView({ behavior: "smooth" })}>Jobs</li>
             <li onClick={() => document.getElementById("about-section").scrollIntoView({ behavior: "smooth" })}>About</li>
             <li>Employers</li>
             <li onClick={() => document.getElementById("contact-section").scrollIntoView({ behavior: "smooth" })}>
@@ -26,8 +27,8 @@ const HomePage = () => {
         </nav>
 
         <div className="nav-buttons">
-          <button className="btn-outline" onClick={()=>navigate("/login")}>Login</button>
-          <button className="btn-primary" onClick={()=>navigate("/employer-login")}>Post Job</button>
+          <button className="btn-outline" onClick={()=>navigate("/login")}>User Login</button>
+          <button className="btn-primary" onClick={()=>navigate("/employer-login")}>Admin Login</button>
         </div>
       </header>
       </div>
@@ -62,7 +63,12 @@ const HomePage = () => {
         </button>
       </div>
       </div>
-      <div  id ="about-section" className="about"> 
+      
+      <div className="about" id ="job-list">
+      <h1 className="about-heading">Jobs :-</h1>
+        {<JobList/>}
+        </div>
+        <div  id ="about-section" className="about"> 
         <h1 className="about-heading">About :-</h1>
        <i>
         Our Job Listing Portal is a dynamic web application designed to connect job seekers with potential employers
