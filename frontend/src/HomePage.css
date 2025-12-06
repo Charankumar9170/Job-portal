@@ -1,0 +1,186 @@
+/* Background Hero Styling */
+.body {
+    width: 100%;
+    height: 600px;
+    background-size: cover;
+    background-position: center;
+    background-image: url("/Users/charankurukuntla/Downloads/background.jpeg");
+    position: relative;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  /* Navbar */
+  .navbar {
+    width: 95%;
+    padding: 20px 50px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .logo {
+    font-size: 28px;
+    font-weight: bold;
+  }
+  .job-list{
+    width:100%;
+    height:100%;
+  }
+  .logo-highlight {
+    color: orange;
+  }
+  
+  .nav-links {
+    display: flex;
+    gap: 25px;
+    list-style: none;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  /* Buttons in Header */
+  .nav-buttons button {
+    padding: 10px 20px;
+    font-size: 14px;
+    margin-left: 15px;
+    cursor: pointer;
+    border-radius: 6px;
+  }
+  
+  .btn-outline {
+    border: 2px solid black;
+    background: white;
+  }
+  
+  .btn-primary {
+    background: black;
+    color: white;
+    border: none;
+  }
+  
+  /* Search Section */
+  .search-box-wrapper {
+    background: rgba(0, 0, 0, 0.5);
+    margin: auto;
+    text-align: center;
+    padding: 30px 20px;
+    width: 80%;
+    border-radius: 8px;
+  }
+  
+  .search-title {
+    font-size: 32px;
+    color: white;
+    margin-bottom: 20px;
+  }
+  
+  .search-box {
+    display: flex;
+    background: white;
+    padding: 15px;
+    border-radius: 6px;
+    gap: 10px;
+    justify-content: center;
+  }
+  
+  .search-box select,
+  .search-box input {
+    padding: 10px 15px;
+    border: 1px solid #ccc;
+    width: 220px;
+    border-radius: 4px;
+  }
+  
+  .search-btn {
+    background: orange;
+    border: none;
+    width: 50px;
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 18px;
+  }
+  
+  /* Advanced Search Button */
+  .advanced-btn {
+    background: black;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    margin-top: 20px;
+    cursor: pointer;
+    border-radius: 6px;
+  }
+  
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    .nav-links {
+      display: none;
+    }
+  
+    .search-box {
+      flex-direction: column;
+    }
+  
+    .search-box select,
+    .search-box input {
+      width: 100%;
+    }
+  }
+  .about{
+    margin:100px;
+  }
+  .about i{
+    font-size:30px;
+  }
+.about-heading{
+  color: orange;
+}
+.footer-container {
+  width: 100%;
+  background: #111;
+  color: white;
+  padding: 40px 20px;
+  text-align: center;
+}
+
+.footer-title {
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+.footer-content p {
+  font-size: 16px;
+  margin: 6px 0;
+  opacity: 0.9;
+}
+
+.footer-content strong {
+  color: #fbd38d;
+}
+
+footer hr {
+  width: 80%;
+  margin: 20px auto;
+  border: 0;
+  border-top: 1px solid #444;
+}
+
+copyright {
+  margin-top: 10px;
+  font-size: 14px;
+  opacity: 0.7;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .footer-title {
+    font-size: 24px;
+  }
+
+  .footer-content p {
+    font-size: 14px;
+  }
+}
+  

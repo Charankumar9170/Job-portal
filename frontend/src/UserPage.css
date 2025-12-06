@@ -1,0 +1,671 @@
+/* ------------------------------------------------------
+   GLOBAL RESET + BASE
+------------------------------------------------------ */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont,
+      "Segoe UI", sans-serif;
+  }
+  
+  body {
+    background: #f2f2f2;
+  }
+  
+  .app {
+    min-height: 100vh;
+    transition: background 0.3s ease, color 0.3s ease;
+  }
+  
+  /* Light mode */
+  .app.light {
+    color: #111;
+    background: rgba(255, 255, 255, 0.6);
+  }
+  
+  /* Dark mode – make it light black & transparent so bg is visible */
+  .app.dark {
+    color: #f9f9f9;
+    background: rgba(0, 0, 0, 0.4); /* LIGHT black overlay */
+  }
+  
+  /* ------------------------------------------------------
+     GLOBAL BACKGROUND (HOME PAGE)
+  ------------------------------------------------------ */
+  html, body {
+    overflow-x: hidden;
+  }
+  
+  .bg {
+    position: fixed;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    filter: brightness(0.8); /* keep bg visible */
+    z-index: -1;
+  }
+  
+  /* ------------------------------------------------------
+     TOPBAR
+  ------------------------------------------------------ */
+  /* TOPBAR MAIN */
+  /* TOPBAR WITH COMPLETE RECTANGULAR BORDER */
+  /* FULL WIDTH TOPBAR */
+  .topbar {
+    width: 100%;
+    padding: 22px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  
+    /* Rectangle border */
+    border: 2px solid black;
+    border-radius: 0; /* full rectangle */
+  
+    /* Light glass background */
+    background: rgba(255, 255, 255, 0.55);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+  
+    /* Drop shadow */
+    box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.25);
+  
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 999;
+  
+    transition: 0.3s ease;
+  }
+  
+  /* DARK MODE TOPBAR */
+  .app.dark .topbar {
+    border: 2px solid white;
+    background: rgba(20, 20, 20, 0.35);
+  
+    box-shadow: 0px 5px 20px rgba(255, 255, 255, 0.18);
+  }
+  
+  .hello {
+    font-size: 20px;
+    font-weight: 500;
+  }
+  
+  .headline {
+    font-size: 36px;
+    font-weight: 900;
+    margin-top: 6px;
+  }
+  
+  /* Highlighted phrase */
+  .highlight {
+    background: linear-gradient(120deg, #ff9a9e, #fecfef);
+    padding: 5px 10px;
+    border-radius: 12px;
+  }
+  
+  /* Make highlight text visible in both modes */
+  .app.light .highlight {
+    color: #111;
+  }
+  
+  .app.dark .highlight {
+    color: #111; /* still dark on a light-ish gradient */
+  }
+  
+  /* Right side (theme + profile) */
+  
+  .right {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  
+  .theme-btn {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    font-size: 20px;
+    background: rgba(255, 255, 255, 0.8);
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+  }
+  
+  .profile {
+    position: relative;
+  }
+  
+  .avatar {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    border: none;
+    background: #111;
+    color: #fff;
+    font-weight: 700;
+    cursor: pointer;
+  }
+  
+  /* Dropdown menu */
+  
+  .dropdown {
+    position: absolute;
+    right: 0;
+    top: 48px;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 10px;
+    overflow: hidden;
+    min-width: 130px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
+    z-index: 20;
+  }
+  
+  .dropdown button {
+    width: 100%;
+    padding: 10px 12px;
+    border: none;
+    background: transparent;
+    text-align: left;
+    cursor: pointer;
+    font-size: 14px;
+  }
+  
+  .dropdown button:hover {
+    background: rgba(0, 0, 0, 0.05);
+  }
+  
+  /* ------------------------------------------------------
+     FILTERS SECTION
+  ------------------------------------------------------ */
+  /* Place filters just 8px below the topbar */
+  .filters-section {
+    margin-top: 160px;        /* 👈 THIS sets the exact distance from topbar */
+    display: flex;
+    justify-content: center;
+  }
+  
+  .filter-box {
+    width: 85%;
+    padding: 20px;
+    border-radius: 18px;
+    background: rgba(255, 255, 255, 0.75);
+    backdrop-filter: blur(18px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  }
+  
+  /* Dark mode – gentle dark glass so bg is visible */
+  .app.dark .filter-box {
+    background: rgba(18, 18, 18, 0.7);
+    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.5);
+  }
+  
+  .filter-box h2 {
+    margin-bottom: 16px;
+    font-size: 22px;
+    font-weight: 700;
+  }
+  
+  .filter-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+  }
+  
+  .filter-grid input,
+  .filter-grid select {
+    padding: 12px 14px;
+    border-radius: 12px;
+    border: 1px solid rgba(0, 0, 0, 0.18);
+    font-size: 14px;
+    outline: none;
+  }
+  
+  /* Inputs in dark mode */
+  .app.dark .filter-grid input,
+  .app.dark .filter-grid select {
+    background: rgba(25, 25, 25, 0.9);
+    border-color: rgba(255, 255, 255, 0.2);
+    color: #f9f9f9;
+  }
+  
+  .filter-grid input::placeholder,
+  .filter-grid select::placeholder {
+    color: #777;
+  }
+  
+  .filter-actions {
+    margin-top: 16px;
+    display: flex;
+    gap: 12px;
+  }
+  
+  /* Buttons */
+  
+  .apply-btn {
+    background: #1a73e8;
+    color: #fff;
+    padding: 10px 18px;
+    border-radius: 12px;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    transition: 0.25s ease;
+  }
+  
+  .apply-btn:hover {
+    transform: translateY(-1px) scale(1.03);
+    background: #0f5fd2;
+  }
+  
+  .clear-btn {
+    padding: 10px 18px;
+    border-radius: 12px;
+    border: 1px solid rgba(0, 0, 0, 0.6);
+    background: transparent;
+    cursor: pointer;
+    font-size: 14px;
+  }
+  
+  /* Dark mode border for clear button */
+  .app.dark .clear-btn {
+    border-color: rgba(255, 255, 255, 0.5);
+    color: #f9f9f9;
+  }
+  
+  /* ------------------------------------------------------
+     JOB LIST / CARDS
+  ------------------------------------------------------ */
+  
+  .job-section {
+    display: flex;
+    justify-content: center;
+    margin: 26px 0 40px;
+  }
+  
+  .job-list {
+    width: 85%;
+  }
+  
+  .job-card {
+    padding: 20px 22px;
+    border-radius: 16px;
+    margin-bottom: 18px;
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(16px);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-left: 6px solid #1a73e8;
+    transition: 0.25s ease;
+  }
+  
+  /* Dark mode job card – semi-transparent dark, bg visible */
+  .app.dark .job-card {
+    background: rgba(15, 15, 15, 0.75);
+    border-color: rgba(255, 255, 255, 0.15);
+  }
+  
+  .job-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 26px rgba(0, 0, 0, 0.18);
+  }
+  
+  .job-title {
+    font-size: 20px;
+    font-weight: 800;
+    margin-bottom :10px;
+    color: blue;
+  }
+  
+  .company {
+    margin-top: 4px;
+    font-size: 14px;
+    opacity: 0.8;
+  }
+  
+  .meta {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+    flex-wrap: wrap;
+  }
+  
+  .meta-pill {
+    font-size: 12px;
+    padding: 5px 10px;
+    border-radius: 999px;
+    background: #eef3ff;
+    color: #1a73e8;
+    font-weight: 600;
+  }
+  
+  /* Dark mode pill */
+  .app.dark .meta-pill {
+    background: rgba(34, 93, 200, 0.2);
+    color: #d0e1ff;
+  }
+  
+  .desc {
+    margin-top: 10px;
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  
+  .skills {
+    margin-top: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  
+  .skill {
+    font-size: 12px;
+    padding: 5px 10px;
+    border-radius: 999px;
+    background: rgba(0, 0, 0, 0.04);
+  }
+  
+  /* Dark mode skill */
+  .app.dark .skill {
+    background: rgba(255, 255, 255, 0.1);
+  }
+  
+  /* Apply button (inside job card) */
+  
+  .job-card .apply-btn {
+    margin-top: 14px;
+  }
+  
+  /* ------------------------------------------------------
+     PROFILE PAGE
+  ------------------------------------------------------ */
+  .profile-page {
+    min-height: 100vh;
+    padding: 10px 20px;   /* reduced */
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    display: flex;
+    flex-direction: column;
+    margin-top: 0 !important;
+  }
+  
+  /* REMOVE TOP PADDING ONLY FOR PROFILE PAGE */
+  .no-top-padding {
+    padding-top: 0 !important;
+    margin-top: 0 !important;
+  }
+  
+  body.no-top-padding,
+  .app.no-top-padding {
+    padding-top: 0 !important;
+    margin-top: 0 !important;
+  }
+  
+  /* Header (back + theme) */
+  .profile-header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  
+    padding: 16px 20px;
+  
+    border: 2px solid black;
+    border-radius: 0;
+  
+    background: rgba(255, 255, 255, 0.55);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+  
+    box-shadow: 0px 6px 22px rgba(0, 0, 0, 0.28);
+  
+    margin-bottom: 22px;
+  }
+  
+  /* DARK MODE */
+  .app.dark .profile-header {
+    border: 2px solid white;
+    background: rgba(20, 20, 20, 0.35);
+  
+    box-shadow: 0px 6px 22px rgba(255, 255, 255, 0.22);
+  }
+  
+  /* REMOVE TOP GAP for profile page */
+  .profile-page {
+    padding-top: 0 !important;
+  }
+  
+  /* FULL WIDTH HEADER ADJUST */
+  .profile-header {
+    margin-top: 0 !important;
+    width: calc(100% + 40px);
+    margin-left: -20px;
+    margin-right: -20px;
+  
+    padding: 16px 20px;
+  
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  
+    border: 2px solid black;
+    border-radius: 0;
+  
+    background: rgba(255, 255, 255, 0.55);
+    backdrop-filter: blur(14px);
+    box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.25);
+  }
+  
+  .app.dark .profile-header {
+    border: 2px solid white;
+    background: rgba(20, 20, 20, 0.35);
+    box-shadow: 0px 5px 20px rgba(255, 255, 255, 0.22);
+  }
+  
+  .back-btn {
+    background: #1a73e8;
+    color: #fff;
+    padding: 9px 16px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    transition: 0.25s;
+  }
+  
+  .back-btn:hover {
+    background: #0f5fd2;
+    transform: translateY(-1px);
+  }
+  
+  /* Container: sidebar + main */
+  .profile-container {
+    margin-top: 26px;
+    display: flex;
+    gap: 22px;
+    align-items: flex-start;
+  }
+  
+  /* Sidebar */
+  .profile-sidebar {
+    width: 230px;
+    padding: 18px;
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.75);
+    backdrop-filter: blur(18px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+  }
+  
+  /* Dark mode sidebar – semi-transparent */
+  .app.dark .profile-sidebar {
+    background: rgba(18, 18, 18, 0.7);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6);
+  }
+  
+  .profile-sidebar h3 {
+    font-size: 18px;
+    margin-bottom: 12px;
+  }
+  
+  .side-btn {
+    width: 100%;
+    padding: 10px 12px;
+    margin-bottom: 8px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    text-align: left;
+    background: #111;
+    color: white;
+    transition: 0.25s ease;
+  }
+  
+  .side-btn:hover {
+    background: #222;
+    transform: translateX(2px);
+  }
+  
+  /* Main content */
+  .profile-content {
+    flex: 1;
+    padding: 22px;
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(18px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18);
+  }
+  
+  /* Dark mode main – keep bg visible */
+  .app.dark .profile-content {
+    background: rgba(15, 15, 15, 0.72);
+    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.7);
+  }
+  
+  .section {
+    margin-bottom: 26px;
+  }
+  
+  .section h2 {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 10px;
+  }
+  
+  /* Inputs inside profile */
+  .section input[type="text"],
+  .section input[type="file"],
+  .section input[type="email"],
+  .section input[type="number"] {
+    width: 100%;
+    padding: 11px 13px;
+    margin-top: 8px;
+    border-radius: 10px;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    font-size: 14px;
+  }
+  
+  /* Dark mode inputs */
+  .app.dark .section input {
+    background: rgba(30, 30, 30, 0.9);
+    border-color: rgba(255, 255, 255, 0.25);
+    color: #f9f9f9;
+  }
+  
+  /* Applied jobs cards */
+  .applied-card {
+    padding: 12px 14px;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(14px);
+    margin-bottom: 10px;
+    border-left: 4px solid #1a73e8;
+  }
+  
+  /* Dark mode applied card */
+  .app.dark .applied-card {
+    background: rgba(20, 20, 20, 0.8);
+    border-left-color: #ffffff;
+  }
+  
+  .applied-card h4 {
+    font-size: 15px;
+    margin-bottom: 4px;
+  }
+  
+  .applied-card p {
+    font-size: 13px;
+    opacity: 0.85;
+  }
+  
+  .applied-card span {
+    font-size: 12px;
+    padding: 4px 8px;
+    border-radius: 999px;
+    background: #eef3ff;
+    color: #1a73e8;
+  }
+  
+  /* Dark mode badge */
+  .app.dark .applied-card span {
+    background: rgba(255, 255, 255, 0.15);
+    color: #e2eaff;
+  }
+  
+  /* ------------------------------------------------------
+     FOOTER
+  ------------------------------------------------------ */
+  .footer {
+    position: static !important;
+    margin-top: 40px !important;
+  
+    width: 100%;
+    text-align: center;
+    padding: 18px 0;
+  
+    border: 2px solid black;
+    border-radius: 0;
+    
+    background: rgba(255, 255, 255, 0.55);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+  
+    box-shadow: 0px -4px 18px rgba(0, 0, 0, 0.2);
+  
+    font-size: 15px;
+    font-weight: 600;
+  
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 999;
+  }
+  
+  /* DARK MODE — INVERT BORDER COLOR */
+  .app.dark .footer {
+    border: 2px solid white;
+    background: rgba(20, 20, 20, 0.35);
+    color: #fff;
+    box-shadow: 0px -4px 18px rgba(255, 255, 255, 0.18);
+  }
+  
+  /* ------------------------------------------------------
+     MISC
+  ------------------------------------------------------ */
+  
+  .loading {
+    text-align: center;
+    margin-top: 30px;
+    font-size: 14px;
+    opacity: 0.8;
+  }
+  
+  /* neumorphism helper (unused placeholder) */
+  .neu {
+    /* already covered mostly by explicit bg rules; keep simple */
+  }
+  
