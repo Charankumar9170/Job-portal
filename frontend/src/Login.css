@@ -15,8 +15,8 @@
   /* Center container */
   .login-container {
     width: 56%;
-    height: 56%;
-    background: 	#FFFAF0;
+    height: cover;
+    background: whitesmoke;
     border-radius: 15px;
     display: flex;
     box-shadow: 0px 6px 25px rgba(0, 0, 0, 0.2);

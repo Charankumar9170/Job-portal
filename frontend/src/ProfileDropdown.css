@@ -1,0 +1,114 @@
+/* ------------------------------------------
+   BEAUTIFUL GLASS PROFILE DROPDOWN PANEL
+------------------------------------------- */
+
+.profile-panel {
+    position: absolute;
+    top: 60px;
+    right: 0;
+    width: 380px;
+    padding: 22px;
+    border-radius: 22px;
+  
+    background: rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(18px) saturate(180%);
+    -webkit-backdrop-filter: blur(18px) saturate(180%);
+  
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35);
+  
+    animation: slideFade 0.25s ease-out;
+    z-index: 999;
+  }
+  
+  /* Animation */
+  @keyframes slideFade {
+    from {
+      opacity: 0;
+      transform: translateY(-10px) scale(0.98);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+  
+  /* TOP SECTION */
+  .profile-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  }
+  
+  .profile-photo {
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #4c8dff, #1a73e8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    color: #fff;
+    font-size: 22px;
+    box-shadow: 0 6px 15px rgba(26, 115, 232, 0.4);
+  }
+  
+  .profile-header h2 {
+    font-size: 18px;
+    font-weight: 800;
+    color: var(--text-main);
+  }
+  
+  .profile-email {
+    font-size: 13px;
+    color: var(--text-subtle);
+  }
+  
+  /* MIDDLE SECTION */
+  .profile-details {
+    margin: 16px 0;
+    font-size: 14px;
+    color: var(--text-subtle);
+  }
+  
+  .profile-details p {
+    margin-bottom: 6px;
+  }
+  
+  /* BUTTONS */
+  .profile-btn {
+    width: 100%;
+    padding: 12px;
+    border-radius: 12px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    border: none;
+    margin-top: 10px;
+    transition: 0.25s ease;
+  }
+  
+  .view-btn {
+    background: linear-gradient(135deg, #1a73e8, #0053c7);
+    color: white;
+    box-shadow: 0 8px 18px rgba(26, 115, 232, 0.35);
+  }
+  
+  .view-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 26px rgba(26, 115, 232, 0.55);
+  }
+  
+  .logout-btn {
+    background: linear-gradient(135deg, #e53935, #c11f21);
+    color: white;
+    box-shadow: 0 8px 18px rgba(229, 57, 53, 0.35);
+  }
+  
+  .logout-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 26px rgba(229, 57, 53, 0.55);
+  }

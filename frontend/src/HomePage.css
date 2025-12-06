@@ -23,7 +23,10 @@
     font-size: 28px;
     font-weight: bold;
   }
-  
+  .job-list{
+    width:100%;
+    height:100%;
+  }
   .logo-highlight {
     color: orange;
   }

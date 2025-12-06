@@ -6,9 +6,10 @@ import Employerlogin from "./Employer_login";
 import Employersignup from "./Employer_signup";
 import "./App.css";
 import HomePage from "./HomePage";
-import UserHomePage from "./UserHomePage";
 import EmployerHomePage from "./EmployerHomePage";
-
+import MainLayout from "./AdminPage";
+import UserPage from "./UserPage";
+import JobList from "./JobList";
 function App() {
   return (
     <BrowserRouter>
@@ -19,10 +20,11 @@ function App() {
           <Route path="/signup" element={<Signup />} />
           <Route path="/employer-signup" element={<Employersignup />} />
           <Route path="/employer-login" element={<Employerlogin/>} />
-          <Route path="/user-home-page" element={<UserHomePage />} />
+          <Route path="/user-home-page/*" element={<UserPage />} />
           <Route path="/home-page" element={<HomePage />} />
           <Route path="/employer-home-page" element={<EmployerHomePage />} />
-
+          <Route path="/admin-homepage" element={<MainLayout />} />
+          <Route path ="/joblist" element={<JobList/>}/>
         </Routes>
       </div>
     </BrowserRouter>

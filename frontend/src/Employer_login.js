@@ -34,7 +34,7 @@ function Employerlogin() {
         alert("Login successful!");
 
         // Redirect to dashboard or profile page
-        navigate("/employer-home-page");
+        navigate("/admin-homepage");
       } else {
         setMessage(data.message || "Login failed");
       }
@@ -63,7 +63,7 @@ function Employerlogin() {
         </nav>
 
         <div className="nav-buttons">
-          <button className="btn-outline" onClick={()=>navigate("/employer-signup")}>SignUp</button>
+          <button className="btn-outline" onClick={()=>navigate("/employer-signup")}>Admin SignUp</button>
         </div>
       </header>
       </div>

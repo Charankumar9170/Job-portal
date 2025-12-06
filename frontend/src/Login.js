@@ -63,12 +63,11 @@ function Login() {
         </nav>
 
         <div className="nav-buttons">
-          <button className="btn-outline" onClick={()=>navigate("/signup")}>SignUp</button>
-          <button className="btn-primary" onClick={()=>navigate("/employer-login")}>Post Job</button>
+          <button className="btn-outline" onClick={()=>navigate("/signup")}>User SignUp</button>
+          <button className="btn-primary" onClick={()=>navigate("/employer-login")}>Employer Login</button>
         </div>
       </header>
       </div>
-
      <div className="main-bg">
      <div className="login-container">
         <form className="login-box" onSubmit={handleSubmit}>
@@ -94,13 +93,11 @@ function Login() {
 
           <button type="submit">Login</button>
           {message && <p style={{ color: "red" }}>{message}</p>}
-
           <p className="switch-text">
             Don’t have an account?{" "}
             <span onClick={()=>navigate("/signup")}>Sign up</span>
           </p>
         </form>
-
         <div className="image-box">
           <img src="/image1.jpeg" height={200} width={300} alt="Login Visual" />
         </div>

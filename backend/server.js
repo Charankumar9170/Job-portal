@@ -162,15 +162,16 @@ app.get("/api/auth/profile", (req, res) => {
 //EMPLOYER DATA
 //-----------------------------------------------------------------------------------
 app.post("/employer-register", (req, res) => {
-  const { name, email, password } = req.body;
+  const {organisation, name, mobile_num, email, password } = req.body;
+  const post_count = 0;
 
   // Empty field check
-  if (!name || !email || !password) {
+  if (!organisation || !name || !mobile_num || !email || !password) {
     return res.status(400).json({ message: "All fields are required" });
   }
 
   db.query(
-    "SELECT * FROM Employer WHERE email = ?",
+    "SELECT * FROM Employer WHERE email = ?  ",
     [email],
     async (err, results) => {
       if (err) {
@@ -185,8 +186,8 @@ app.post("/employer-register", (req, res) => {
       const hashedPassword = await bcrypt.hash(password, 10);
 
       db.query(
-        "INSERT INTO Employer (name, email, password) VALUES (?, ?, ?)",
-        [name, email, hashedPassword],
+        "INSERT INTO Employer (organisation,name, mobile_num,email, password,post_count) VALUES (?, ?, ?, ?,?,?)",
+        [organisation, name, mobile_num,email, hashedPassword,post_count],
         (err) => {
           if (err) {
             console.log("❌ Insert Error:", err);
@@ -252,7 +253,7 @@ app.get("/api/auth/employer-profile", (req, res) => {
       return res.status(401).json({ message: "Invalid or expired token" });
 
     db.query(
-      "SELECT id, name, email FROM Employer WHERE id = ?",
+      "SELECT id,organisation, name, email , post_count FROM Employer WHERE id = ?",
       [decoded.id],
       (err, results) => {
         if (err)
@@ -266,6 +267,132 @@ app.get("/api/auth/employer-profile", (req, res) => {
     );
   });
 });
+//--------------------Jobs Data ---------------------------------------
+
+//---------------- Job Posting ROUTE -----------------------------------
+app.post("/post-job", (req, res) => {
+  
+  const { id, title, location,work_mode,skills, salary, qualification, responsibilities, description } = req.body;
+
+  if (!id || !title || !location || !work_mode || !skills || !salary || !qualification || !responsibilities || !description) {
+    return res.status(400).json({ message: "All fields are required!" });
+  }
+
+  const sql = `
+    INSERT INTO Jobs 
+    (employee_id, title, location,work_mode, skills, salary, qualification, responsibilities, description) 
+    VALUES (?, ?, ?,? ,?, ?, ?, ?, ?)
+  `;
+
+  db.query(
+    sql,
+    [id, title, location,work_mode,skills, salary, qualification, responsibilities, description],
+    (err) => {
+      if (err) {
+        console.log("❌ Insert Error:", err);
+        return res.status(500).json({ message: "Database error" });
+      }
+      return res.json({ message: "Job created successfully" });
+    }
+  );
+  
+});
+//------------------fetch jobs------------------
+app.get("/fetch-jobs", (req, res) => {
+  const token = req.headers.authorization?.split(" ")[1];
+
+  if (!token) {
+    return res.status(401).json({ message: "No token provided" });
+  }
+
+  jwt.verify(token, JWT_SECRET, (err, decoded) => {
+    if (err) {
+      return res.status(401).json({ message: "Invalid or expired token" });
+    }
+
+    const employerId = decoded.id;
+
+    const fetchJobsQuery = `
+      SELECT Sno, employee_id, title, location, work_mode, skills, salary, qualification, responsibilities, description
+      FROM Jobs 
+      WHERE employee_id = ?
+    `;
+
+    db.query(fetchJobsQuery, [employerId], (err, jobs) => {
+      if (err) {
+        console.error("Job Fetch Error:", err);
+        return res.status(500).json({ message: "Database error" });
+      }
+
+      const countQuery = `
+        SELECT COUNT(*) AS jobCount 
+        FROM Jobs 
+        WHERE employee_id = ?
+      `;
+
+      db.query(countQuery, [employerId], (err, countResult) => {
+        if (err) {
+          console.error("Count Fetch Error:", err);
+          return res.status(500).json({ message: "Database error" });
+        }
+
+        const jobCount = countResult[0].jobCount;
+
+        // 🔥 3️⃣ Update post_count in Employer table
+        const updateQuery = `
+          UPDATE Employer 
+          SET post_count = ?
+          WHERE id = ?
+        `;
+
+        db.query(updateQuery, [jobCount, employerId], (err) => {
+          if (err) {
+            console.error("Update Error:", err);
+            return res.status(500).json({ message: "Update operation failed" });
+          }
+
+          // ✔ Now send the final response only after update success
+          return res.json({
+            message: "Job list fetched and count updated successfully",
+            jobCount,
+            jobs
+          });
+        });
+      });
+    });
+  });
+});
+
+//-----------------------All the jobs in database,
+app.get("/all-jobs", (req, res) => {
+  
+  const jobsQuery = "SELECT * FROM Jobs";
+  const countQuery = "SELECT COUNT(*) AS jobCount FROM Jobs";
+
+  db.query(jobsQuery, (err, jobs) => {
+    if (err) {
+      console.error("Job Fetch Error:", err);
+      return res.status(500).json({ message: "Database error while fetching jobs" });
+    }
+
+    db.query(countQuery, (err, countResult) => {
+      if (err) {
+        console.error("Count Fetch Error:", err);
+        return res.status(500).json({ message: "Database error while counting jobs" });
+      }
+
+      const jobCount = countResult[0].jobCount;
+
+      return res.json({
+        message: "All jobs fetched successfully",
+        jobCount: jobCount,
+        jobs: jobs
+      });
+    });
+  });
+});
+
+
 //--------------------------------------------------------------------
 app.listen(PORT, () => {
   console.log(`🚀 Server running on http://localhost:${PORT}`);
